@@ -1,0 +1,28 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "C:\\Users\\Administrator\\AppData\\Local\\Arduino15\\packages\\STM32\\tools\\**",
+                "C:\\Users\\Administrator\\AppData\\Local\\Arduino15\\packages\\STM32\\hardware\\stm32\\1.8.0\\**",
+                "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\**",
+                "C:\\Program Files (x86)\\Arduino\\tools\\**",
+                "C:\\Users\\Administrator\\Documents\\Arduino\\libraries\\**"
+            ],
+            "forcedInclude": [
+                "C:\\Users\\Administrator\\AppData\\Local\\Arduino15\\packages\\STM32\\hardware\\stm32\\1.8.0\\cores\\arduino\\Arduino.h"
+            ],
+            "intelliSenseMode": "msvc-x64",
+            "compilerPath": "C:\\MinGW\\bin\\gcc.exe",
+            "cStandard": "c11",
+            "cppStandard": "c++17",
+            "defines": [
+                "USBCON",
+                "HAL_TIM_MODULE_ENABLED",
+                "STM32F1xx",
+                "STM32F103xB"
+            ]
+        }
+    ],
+    "version": 4
+}
