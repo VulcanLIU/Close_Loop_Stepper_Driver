@@ -30,7 +30,6 @@ void TIM_begin();
 void TIM1_begin();
 void TIM2_begin();
 void TIM3_begin();
-void TIM4_begin();
 
 //定时器设置频率函数
 void TIM2_setOverflow(uint32_t _freq_);

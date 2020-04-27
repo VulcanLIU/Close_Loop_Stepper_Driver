@@ -1,24 +1,25 @@
-#include "Stepper.h"
-#include "UI.h"
-#include "MyTimer.h"
-#include "CMD.h"
-#include "PID_v1.h"
-#include "Debug_configuration.h"
+# 1 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
+# 2 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino" 2
+# 3 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino" 2
+
+# 5 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino" 2
+# 6 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino" 2
+
 
 /*****   变量定义   *****/
 //DEBUG开关宏定义
-#define SERIAL_DEBUG
+
 
 //PID定义
 double Kp = 2, Ki = 5, Kd = 1;
-PID StepperX_PID(&Stepper_X.Current_speed, &TIM2_freq, &Stepper_X.Target_speed, Kp, Ki, Kd, DIRECT);
-PID StepperY_PID(&Stepper_Y.Current_speed, &TIM3_freq, &Stepper_Y.Target_speed, Kp, Ki, Kd, DIRECT);
-PID StepperZ_PID(&Stepper_Z.Current_speed, &TIM4_freq, &Stepper_Z.Target_speed, Kp, Ki, Kd, DIRECT);
+PID StepperX_PID(&Stepper_X.Current_speed, &TIM2_freq, &Stepper_X.Target_speed, Kp, Ki, Kd, 0);
+PID StepperY_PID(&Stepper_Y.Current_speed, &TIM3_freq, &Stepper_Y.Target_speed, Kp, Ki, Kd, 0);
+PID StepperZ_PID(&Stepper_Z.Current_speed, &TIM4_freq, &Stepper_Z.Target_speed, Kp, Ki, Kd, 0);
 
 void setup()
 {
     //开启串口
-    Serial.begin(115200);
+    Serial2.begin(115200);
 
     //步进电机初始化
     Stepper_begin();
@@ -30,9 +31,9 @@ void setup()
     TIM_begin();
 
     //PID计算器初始化
-    StepperX_PID.SetMode(AUTOMATIC);
-    StepperY_PID.SetMode(AUTOMATIC);
-    StepperZ_PID.SetMode(AUTOMATIC);
+    StepperX_PID.SetMode(1);
+    StepperY_PID.SetMode(1);
+    StepperZ_PID.SetMode(1);
 }
 
 void loop()
@@ -128,47 +129,35 @@ void TIM1_Update_IT_callback(HardwareTimer *)
     default:
         break;
     }
-
-#ifdef TIM1_DEBUG
-    Serial.print("T1_cb:");
-    Serial.print(millis());
-    Serial.print("  T2_f:");
-    Serial.print(TIM2_freq);
-    Serial.print("  T3_f:");
-    Serial.print(TIM3_freq);
-    Serial.print("  T4_f:");
-    Serial.print(TIM4_freq);
-    Serial.println();
-#endif
-
+# 144 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
 }
 
 //定时器2比较匹配中断回调函数
 void TIM2_Update_IT_callback(HardwareTimer *)
 {
     Stepper_X_refresh();
-#ifdef TIM2_DEBUG
-    Serial.print("T2_cb:");
-    Serial.println(millis());
-#endif
+
+
+
+
 }
 
 //定时器1比较匹配中断回调函数
 void TIM3_Update_IT_callback(HardwareTimer *)
 {
     Stepper_Y_refresh();
-#ifdef TIM3_DEBUG
-    Serial.print("TIM3_cb:");
-    Serial.println(millis());
-#endif
+
+
+
+
 }
 
 //定时器1比较匹配中断回调函数
 void TIM4_Update_IT_callback(HardwareTimer *)
 {
     Stepper_Z_refresh();
-#ifdef TIM4_DEBUG
-    Serial.print("TIM4_cb:");
-    Serial.println(millis());
-#endif
+
+
+
+
 }

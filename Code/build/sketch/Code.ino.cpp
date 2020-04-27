@@ -1,3 +1,5 @@
+#include <Arduino.h>
+#line 1 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
 #include "Stepper.h"
 #include "UI.h"
 #include "MyTimer.h"
@@ -15,6 +17,19 @@ PID StepperX_PID(&Stepper_X.Current_speed, &TIM2_freq, &Stepper_X.Target_speed, 
 PID StepperY_PID(&Stepper_Y.Current_speed, &TIM3_freq, &Stepper_Y.Target_speed, Kp, Ki, Kd, DIRECT);
 PID StepperZ_PID(&Stepper_Z.Current_speed, &TIM4_freq, &Stepper_Z.Target_speed, Kp, Ki, Kd, DIRECT);
 
+#line 18 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
+void setup();
+#line 38 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
+void loop();
+#line 76 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
+void TIM1_Update_IT_callback(HardwareTimer *);
+#line 147 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
+void TIM2_Update_IT_callback(HardwareTimer *);
+#line 157 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
+void TIM3_Update_IT_callback(HardwareTimer *);
+#line 167 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
+void TIM4_Update_IT_callback(HardwareTimer *);
+#line 18 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
 void setup()
 {
     //开启串口

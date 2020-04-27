@@ -2,5 +2,6 @@
     "board": "STM32:stm32:Nucleo_64",
     "sketch": "Code.ino",
     "port": "COM3",
+    "output": "./build",
     "configuration": "pnum=NUCLEO_F103RB,upload_method=MassStorage,xserial=generic,usb=none,xusb=FS,opt=osstd,rtlib=nano"
 }
