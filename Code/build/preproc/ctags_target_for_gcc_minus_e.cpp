@@ -10,12 +10,6 @@
 //DEBUG开关宏定义
 
 
-//PID定义
-double Kp = 2, Ki = 5, Kd = 1;
-PID StepperX_PID(&Stepper_X.Current_speed, &TIM2_freq, &Stepper_X.Target_speed, Kp, Ki, Kd, 0);
-PID StepperY_PID(&Stepper_Y.Current_speed, &TIM3_freq, &Stepper_Y.Target_speed, Kp, Ki, Kd, 0);
-PID StepperZ_PID(&Stepper_Z.Current_speed, &TIM4_freq, &Stepper_Z.Target_speed, Kp, Ki, Kd, 0);
-
 void setup()
 {
     //开启串口
@@ -30,10 +24,7 @@ void setup()
     //定时器初始化
     TIM_begin();
 
-    //PID计算器初始化
-    StepperX_PID.SetMode(1);
-    StepperY_PID.SetMode(1);
-    StepperZ_PID.SetMode(1);
+    PID_begin();
 }
 
 void loop()
@@ -86,7 +77,7 @@ void TIM1_Update_IT_callback(HardwareTimer *)
         break;
     case S_mode:
         /* 增量PID代码段 */
-        StepperX_PID.Compute();
+        TIM2_freq = PID_X_Compute(Stepper_X.Current_speed, Stepper_X.Target_speed);
         //更新定时器频率
         TIM2_setOverflow(TIM2_freq);
         break;
@@ -104,7 +95,7 @@ void TIM1_Update_IT_callback(HardwareTimer *)
         break;
     case S_mode:
         /* 增量PID代码段 */
-        StepperY_PID.Compute();
+        TIM3_freq = PID_Y_Compute(Stepper_Y.Current_speed, Stepper_Y.Target_speed);
         //更新定时器频率
         TIM3_setOverflow(TIM3_freq);
         break;
@@ -122,14 +113,14 @@ void TIM1_Update_IT_callback(HardwareTimer *)
         break;
     case S_mode:
         /* 增量PID代码段 */
-        StepperZ_PID.Compute();
+        TIM4_freq = PID_Z_Compute(Stepper_Z.Current_speed, Stepper_Z.Target_speed);
         //更新定时器频率
         TIM4_setOverflow(TIM4_freq);
         break;
     default:
         break;
     }
-# 144 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
+# 134 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
 }
 
 //定时器2比较匹配中断回调函数

@@ -22,13 +22,6 @@ public:
   PID(double *, double *, double *, // * constructor.  links the PID to the Input, Output, and
       double, double, double, int); //   Setpoint.  Initial tuning parameters are also set here
 
-  PID(float *, float *, float *,         // * constructor.  links the PID to the Input, Output, and
-      double, double, double, int, int); //   Setpoint.  Initial tuning parameters are also set here.
-                                         //   (overload for specifying proportional mode)
-
-  PID(float *, float *, float *,    // * constructor.  links the PID to the Input, Output, and
-      double, double, double, int); //   Setpoint.  Initial tuning parameters are also set here
-
   void SetMode(int Mode); // * sets PID to either Manual (0) or Auto (non-0)
 
   bool Compute(); // * performs the PID calculation.  it should be

@@ -76,7 +76,7 @@ void TIM1_Update_IT_callback(HardwareTimer *)
         break;
     case S_mode:
         /* 增量PID代码段 */
-        StepperX_PID.Compute();
+        TIM2_freq = PID_X_Compute(Stepper_X.Current_speed, Stepper_X.Target_speed);
         //更新定时器频率
         TIM2_setOverflow(TIM2_freq);
         break;
@@ -94,7 +94,7 @@ void TIM1_Update_IT_callback(HardwareTimer *)
         break;
     case S_mode:
         /* 增量PID代码段 */
-        StepperY_PID.Compute();
+        TIM3_freq = PID_Y_Compute(Stepper_Y.Current_speed, Stepper_Y.Target_speed);
         //更新定时器频率
         TIM3_setOverflow(TIM3_freq);
         break;
@@ -112,7 +112,7 @@ void TIM1_Update_IT_callback(HardwareTimer *)
         break;
     case S_mode:
         /* 增量PID代码段 */
-        StepperZ_PID.Compute();
+        TIM4_freq = PID_Z_Compute(Stepper_Z.Current_speed, Stepper_Z.Target_speed);
         //更新定时器频率
         TIM4_setOverflow(TIM4_freq);
         break;

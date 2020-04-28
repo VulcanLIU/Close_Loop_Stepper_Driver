@@ -47,36 +47,6 @@ PID::PID(double *Input, double *Output, double *Setpoint,
 {
 }
 
-PID::PID(float *Input, float *Output, float *Setpoint,
-         double Kp, double Ki, double Kd, int POn, int ControllerDirection)
-{
-   myOutput = (double)Output;
-   myInput = (double)Input;
-   mySetpoint = (double)Setpoint;
-   inAuto = false;
-
-   PID::SetOutputLimits(0, 255); //default output limit corresponds to
-                                 //the arduino pwm limits
-
-   SampleTime = 100; //default Controller Sample Time is 0.1 seconds
-
-   PID::SetControllerDirection(ControllerDirection);
-   PID::SetTunings(Kp, Ki, Kd, POn);
-
-   lastTime = millis() - SampleTime;
-}
-
-/*Constructor (...)*********************************************************
- *    To allow backwards compatability for v1.1, or for people that just want
- *    to use Proportional on Error without explicitly saying so
- ***************************************************************************/
-
-PID::PID(float *Input, float *Output, float *Setpoint,
-         double Kp, double Ki, double Kd, int ControllerDirection)
-    : PID::PID(Input, Output, Setpoint, Kp, Ki, Kd, P_ON_E, ControllerDirection)
-{
-}
-
 /* Compute() **********************************************************************
  *     This, as they say, is where the magic happens.  this function should be called
  *   every time "void loop()" executes.  the function will decide for itself whether a new

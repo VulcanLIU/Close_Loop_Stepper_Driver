@@ -4,32 +4,26 @@
 #include "UI.h"
 #include "MyTimer.h"
 #include "CMD.h"
-#include "PID_v1.h"
+#include "PID.h"
 #include "Debug_configuration.h"
 
 /*****   变量定义   *****/
 //DEBUG开关宏定义
 #define SERIAL_DEBUG
 
-//PID定义
-double Kp = 2, Ki = 5, Kd = 1;
-PID StepperX_PID(&Stepper_X.Current_speed, &TIM2_freq, &Stepper_X.Target_speed, Kp, Ki, Kd, DIRECT);
-PID StepperY_PID(&Stepper_Y.Current_speed, &TIM3_freq, &Stepper_Y.Target_speed, Kp, Ki, Kd, DIRECT);
-PID StepperZ_PID(&Stepper_Z.Current_speed, &TIM4_freq, &Stepper_Z.Target_speed, Kp, Ki, Kd, DIRECT);
-
-#line 18 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
+#line 12 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
 void setup();
-#line 38 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
+#line 29 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
 void loop();
-#line 76 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
+#line 67 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
 void TIM1_Update_IT_callback(HardwareTimer *);
-#line 147 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
+#line 137 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
 void TIM2_Update_IT_callback(HardwareTimer *);
-#line 157 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
+#line 147 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
 void TIM3_Update_IT_callback(HardwareTimer *);
-#line 167 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
+#line 157 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
 void TIM4_Update_IT_callback(HardwareTimer *);
-#line 18 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
+#line 12 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
 void setup()
 {
     //开启串口
@@ -44,10 +38,7 @@ void setup()
     //定时器初始化
     TIM_begin();
 
-    //PID计算器初始化
-    StepperX_PID.SetMode(AUTOMATIC);
-    StepperY_PID.SetMode(AUTOMATIC);
-    StepperZ_PID.SetMode(AUTOMATIC);
+    PID_begin();
 }
 
 void loop()
@@ -100,7 +91,7 @@ void TIM1_Update_IT_callback(HardwareTimer *)
         break;
     case S_mode:
         /* 增量PID代码段 */
-        StepperX_PID.Compute();
+        TIM2_freq = PID_X_Compute(Stepper_X.Current_speed, Stepper_X.Target_speed);
         //更新定时器频率
         TIM2_setOverflow(TIM2_freq);
         break;
@@ -118,7 +109,7 @@ void TIM1_Update_IT_callback(HardwareTimer *)
         break;
     case S_mode:
         /* 增量PID代码段 */
-        StepperY_PID.Compute();
+        TIM3_freq = PID_Y_Compute(Stepper_Y.Current_speed, Stepper_Y.Target_speed);
         //更新定时器频率
         TIM3_setOverflow(TIM3_freq);
         break;
@@ -136,7 +127,7 @@ void TIM1_Update_IT_callback(HardwareTimer *)
         break;
     case S_mode:
         /* 增量PID代码段 */
-        StepperZ_PID.Compute();
+        TIM4_freq = PID_Z_Compute(Stepper_Z.Current_speed, Stepper_Z.Target_speed);
         //更新定时器频率
         TIM4_setOverflow(TIM4_freq);
         break;
@@ -155,7 +146,6 @@ void TIM1_Update_IT_callback(HardwareTimer *)
     Serial.print(TIM4_freq);
     Serial.println();
 #endif
-
 }
 
 //定时器2比较匹配中断回调函数
