@@ -6,13 +6,10 @@
 #include "Debug_configuration.h"
 
 /*****   变量定义   *****/
-//DEBUG开关宏定义
-#define SERIAL_DEBUG
-
 void setup()
 {
     //开启串口
-    Serial.begin(115200);
+    Serial.begin(250000);
 
     //步进电机初始化
     Stepper_begin();
@@ -21,9 +18,10 @@ void setup()
     UI_begin();
 
     //定时器初始化
-    TIM_begin();
+    //TIM_begin();
 
     PID_begin();
+
 }
 
 void loop()

@@ -3,11 +3,11 @@
 
 #include "Arduino.h"
 
-//#define DEBUG_ENABLE
+#define DEBUG_ENABLE
 
 #ifdef DEBUG_ENABLE
-#define ENCODER_DEBUG
-#define ENCODER_DIRECT_OUTPUT
+//#define ENCODER_DEBUG
+//#define ENCODER_DIRECT_OUTPUT
 
 #define UI_DEBUG
 

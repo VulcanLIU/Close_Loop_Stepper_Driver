@@ -3,5 +3,5 @@
     "sketch": "Code.ino",
     "port": "COM3",
     "output": "./build",
-    "configuration": "pnum=NUCLEO_F303RE,upload_method=MassStorage,xserial=generic,usb=none,xusb=FS,opt=osstd,rtlib=nano"
+    "configuration": "pnum=NUCLEO_F103RB,upload_method=serialMethod,xserial=generic,usb=none,xusb=FS,opt=ogstd,rtlib=nano"
 }

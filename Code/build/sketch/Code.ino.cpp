@@ -8,26 +8,23 @@
 #include "Debug_configuration.h"
 
 /*****   变量定义   *****/
-//DEBUG开关宏定义
-#define SERIAL_DEBUG
-
-#line 12 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
+#line 9 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
 void setup();
-#line 29 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
+#line 27 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
 void loop();
-#line 67 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
+#line 65 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
 void TIM1_Update_IT_callback(HardwareTimer *);
-#line 137 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
+#line 135 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
 void TIM2_Update_IT_callback(HardwareTimer *);
-#line 147 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
+#line 145 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
 void TIM3_Update_IT_callback(HardwareTimer *);
-#line 157 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
+#line 155 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
 void TIM4_Update_IT_callback(HardwareTimer *);
-#line 12 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
+#line 9 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
 void setup()
 {
     //开启串口
-    Serial.begin(115200);
+    Serial.begin(250000);
 
     //步进电机初始化
     Stepper_begin();
@@ -36,9 +33,10 @@ void setup()
     UI_begin();
 
     //定时器初始化
-    TIM_begin();
+    //TIM_begin();
 
     PID_begin();
+
 }
 
 void loop()

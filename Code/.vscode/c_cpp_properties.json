@@ -7,10 +7,12 @@
                 "C:\\Users\\Administrator\\AppData\\Local\\Arduino15\\packages\\STM32\\hardware\\stm32\\1.8.0\\**",
                 "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\**",
                 "C:\\Program Files (x86)\\Arduino\\tools\\**",
-                "C:\\Users\\Administrator\\Documents\\Arduino\\libraries\\**"
+                "C:\\Users\\Administrator\\Documents\\Arduino\\libraries\\**",
+                "C:\\Users\\Administrator\\AppData\\Local\\Arduino15\\packages\\STM32\\hardware\\stm32\\1.7.0\\**"
             ],
             "forcedInclude": [
-                "C:\\Users\\Administrator\\AppData\\Local\\Arduino15\\packages\\STM32\\hardware\\stm32\\1.8.0\\cores\\arduino\\Arduino.h"
+                "C:\\Users\\Administrator\\AppData\\Local\\Arduino15\\packages\\STM32\\hardware\\stm32\\1.8.0\\cores\\arduino\\Arduino.h",
+                "C:\\Users\\Administrator\\AppData\\Local\\Arduino15\\packages\\STM32\\hardware\\stm32\\1.7.0\\cores\\arduino\\Arduino.h"
             ],
             "intelliSenseMode": "msvc-x64",
             "compilerPath": "C:\\MinGW\\bin\\gcc.exe",

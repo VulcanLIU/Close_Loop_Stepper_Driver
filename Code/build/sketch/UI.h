@@ -1,7 +1,8 @@
-#ifndef __UI_H__
-#define __UI_H__
+#ifndef __MYUI_H__
+#define __MYUI_H__
 
-#include "Debug_configuration.h"
+//#include "Debug_configuration.h"
+#include "Arduino.h"
 
 //UI界面坐标定义
 
@@ -77,16 +78,6 @@ typedef struct UI_STR
     String string;
 };
 
-UI_STR UI_str[8] = {
-    {STR_S_X, STR_S_Y, "S"},
-    {STR_A_X, STR_A_Y, "S"},
-    {STR_M1_X, STR_M1_Y, "S"},
-    {STR_T1_X, STR_T1_Y, "S"},
-    {STR_M2_X, STR_M2_Y, "S"},
-    {STR_T2_X, STR_T2_Y, "S"},
-    {STR_M3_X, STR_M3_Y, "S"},
-    {STR_T3_X, STR_T3_Y, "S"}};
-
 //定义数据结构体及数组
 typedef struct UI_DATA
 {
@@ -111,19 +102,8 @@ enum UI_DATA_INDEX
     Z_target_angle
 };
 
-UI_DATA UI_data[12] = {
-    {VAL_M1_S_X, VAL_M1_S_Y, 0},
-    {VAL_M1_ST_X, VAL_M1_ST_Y, 0},
-    {VAL_M2_S_X, VAL_M2_S_Y, 0},
-    {VAL_M2_ST_X, VAL_M2_ST_Y, 0},
-    {VAL_M3_S_X, VAL_M3_S_Y, 0},
-    {VAL_M3_ST_X, VAL_M3_ST_Y, 0},
-    {VAL_M1_A_X, VAL_M1_A_Y, 0},
-    {VAL_M1_AT_X, VAL_M1_AT_Y, 0},
-    {VAL_M2_A_X, VAL_M2_A_Y, 0},
-    {VAL_M2_AT_X, VAL_M2_AT_Y, 0},
-    {VAL_M3_A_X, VAL_M3_A_Y, 0},
-    {VAL_M3_AT_X, VAL_M3_AT_Y, 0}};
+extern UI_STR UI_str[8];
+extern UI_DATA UI_data[12];
 
 void UI_begin();
 void UI_update();

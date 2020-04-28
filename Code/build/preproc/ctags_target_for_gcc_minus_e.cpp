@@ -7,13 +7,10 @@
 
 
 /*****   变量定义   *****/
-//DEBUG开关宏定义
-
-
 void setup()
 {
     //开启串口
-    Serial2.begin(115200);
+    Serial2.begin(250000);
 
     //步进电机初始化
     Stepper_begin();
@@ -22,9 +19,10 @@ void setup()
     UI_begin();
 
     //定时器初始化
-    TIM_begin();
+    //TIM_begin();
 
     PID_begin();
+
 }
 
 void loop()
@@ -120,7 +118,18 @@ void TIM1_Update_IT_callback(HardwareTimer *)
     default:
         break;
     }
-# 134 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
+
+
+    Serial2.print("T1_cb:");
+    Serial2.print(millis());
+    Serial2.print("  T2_f:");
+    Serial2.print(TIM2_freq);
+    Serial2.print("  T3_f:");
+    Serial2.print(TIM3_freq);
+    Serial2.print("  T4_f:");
+    Serial2.print(TIM4_freq);
+    Serial2.println();
+
 }
 
 //定时器2比较匹配中断回调函数
@@ -128,8 +137,8 @@ void TIM2_Update_IT_callback(HardwareTimer *)
 {
     Stepper_X_refresh();
 
-
-
+    Serial2.print("T2_cb:");
+    Serial2.println(millis());
 
 }
 
@@ -138,8 +147,8 @@ void TIM3_Update_IT_callback(HardwareTimer *)
 {
     Stepper_Y_refresh();
 
-
-
+    Serial2.print("TIM3_cb:");
+    Serial2.println(millis());
 
 }
 
@@ -148,7 +157,7 @@ void TIM4_Update_IT_callback(HardwareTimer *)
 {
     Stepper_Z_refresh();
 
-
-
+    Serial2.print("TIM4_cb:");
+    Serial2.println(millis());
 
 }
