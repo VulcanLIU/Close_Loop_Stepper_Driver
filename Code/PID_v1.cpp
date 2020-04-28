@@ -50,9 +50,9 @@ PID::PID(double *Input, double *Output, double *Setpoint,
 PID::PID(float *Input, float *Output, float *Setpoint,
          double Kp, double Ki, double Kd, int POn, int ControllerDirection)
 {
-   myOutput = Output;
-   myInput = Input;
-   mySetpoint = Setpoint;
+   myOutput = (double)Output;
+   myInput = (double)Input;
+   mySetpoint = (double)Setpoint;
    inAuto = false;
 
    PID::SetOutputLimits(0, 255); //default output limit corresponds to

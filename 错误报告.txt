@@ -1,7 +1,1 @@
 
-UI.cpp:13:26: error: 'SCREEN_WIDTH' was not declared in this scope
-   13 | Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT,
-      |                          ^~~~~~~~~~~~
-UI.cpp:13:40: error: 'SCREEN_HEIGHT' was not declared in this scope
-   13 | Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT,
-      |                                        ^~~~~~~~~~~~~

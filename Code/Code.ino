@@ -2,18 +2,12 @@
 #include "UI.h"
 #include "MyTimer.h"
 #include "CMD.h"
-#include "PID_v1.h"
+#include "PID.h"
 #include "Debug_configuration.h"
 
 /*****   变量定义   *****/
 //DEBUG开关宏定义
 #define SERIAL_DEBUG
-
-//PID定义
-double Kp = 2, Ki = 5, Kd = 1;
-PID StepperX_PID(&Stepper_X.Current_speed, &TIM2_freq, &Stepper_X.Target_speed, Kp, Ki, Kd, DIRECT);
-PID StepperY_PID(&Stepper_Y.Current_speed, &TIM3_freq, &Stepper_Y.Target_speed, Kp, Ki, Kd, DIRECT);
-PID StepperZ_PID(&Stepper_Z.Current_speed, &TIM4_freq, &Stepper_Z.Target_speed, Kp, Ki, Kd, DIRECT);
 
 void setup()
 {
@@ -29,10 +23,7 @@ void setup()
     //定时器初始化
     TIM_begin();
 
-    //PID计算器初始化
-    StepperX_PID.SetMode(AUTOMATIC);
-    StepperY_PID.SetMode(AUTOMATIC);
-    StepperZ_PID.SetMode(AUTOMATIC);
+    PID_begin();
 }
 
 void loop()
@@ -140,7 +131,6 @@ void TIM1_Update_IT_callback(HardwareTimer *)
     Serial.print(TIM4_freq);
     Serial.println();
 #endif
-
 }
 
 //定时器2比较匹配中断回调函数
