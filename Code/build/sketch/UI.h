@@ -1,7 +1,7 @@
 #ifndef __MYUI_H__
 #define __MYUI_H__
 
-//#include "Debug_configuration.h"
+#include "Debug_configuration.h"
 #include "Arduino.h"
 
 //UI界面坐标定义
@@ -9,8 +9,8 @@
 //行列位置定义
 #define LINE_HIGHT 8
 
-#define LINE1 10
-#define LINE2 (LINE1 + LINE_HIGHT)
+#define LINE1 0
+#define LINE2 (LINE1 + 12)
 #define LINE3 (LINE2 + LINE_HIGHT)
 #define LINE4 (LINE3 + LINE_HIGHT)
 #define LINE5 (LINE4 + LINE_HIGHT)
@@ -18,7 +18,7 @@
 #define LINE7 (LINE6 + LINE_HIGHT)
 
 #define COLUMN1 0
-#define COLUMN2 10
+#define COLUMN2 20
 #define COLUMN3 69
 
 //字符串位置定义

@@ -75,7 +75,7 @@ typedef struct STEPPER
 extern STEPPER Stepper_X;
 extern STEPPER Stepper_Y;
 extern STEPPER Stepper_Z;
-extern STEPPER Stepper_array[3];
+extern STEPPER *Stepper_array[3];
 
 //电机控制函数
 void Stepper_begin();

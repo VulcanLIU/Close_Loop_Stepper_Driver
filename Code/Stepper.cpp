@@ -1,12 +1,12 @@
 #include "Stepper.h"
 
-//定义步进电机对象
+//定义步进电机结构体变量
 STEPPER Stepper_X;
 STEPPER Stepper_Y;
 STEPPER Stepper_Z;
 
-//定义步进电机数组
-STEPPER Stepper_array[3] = {Stepper_X, Stepper_Y, Stepper_Z};
+//定义步进电机结构体指针数组
+STEPPER *Stepper_array[3] = {&Stepper_X, &Stepper_Y, &Stepper_Z};
 
 //三个电机30个定时器周期下的转角间隔储存数组以及写入位置变量
 const int MAX_INDEX = 20;
@@ -41,7 +41,7 @@ void Stepper_begin()
     Stepper_Y.STP = Y_STP;
 
     Stepper_Z.Name = 'Z';
-    Stepper_Z.S_id = 'B';
+    Stepper_Z.S_id = 'C';
     Stepper_Z.DIR = Z_DIR;
     Stepper_Z.STP = Z_STP;
 
@@ -51,6 +51,22 @@ void Stepper_begin()
 
     //编码器初始化
     Encoder_begin();
+
+#ifdef ENCODER_DIRECT_OUTPUT
+    while (1)
+    {
+        digitalToggle((*Stepper_array[0]).STP);
+        digitalToggle((*Stepper_array[1]).STP);
+        digitalToggle((*Stepper_array[2]).STP);
+        Serial.print(analogRead(Encoder_X_pin));
+        Serial.print("  ");
+        Serial.print(analogRead(Encoder_Y_pin));
+        Serial.print("  ");
+        Serial.print(analogRead(Encoder_Z_pin));
+        Serial.println();
+        delay(1);
+    }
+#endif
 }
 
 void Stepper_X_refresh()
@@ -91,62 +107,62 @@ void Stepper_Z_refresh()
 void Stepper_refresh(Stepper_index _i_)
 {
     //读取编码器角度
-    Stepper_array[_i_].Encoder_Value = Encoder_Y_get_angle();
+    (*Stepper_array[_i_]).Encoder_Value = Encoder_get_angle(_i_);
 
     //处理编码器角度
-    if ((Stepper_array[_i_].Encoder_Value - Stepper_array[_i_].Last_Encoder_Value) < -180.0)
-        Stepper_array[_i_].wrap_count += 1; //Check if we've rotated more than a full revolution (have we "wrapped" around from 359 degrees to 0 or ffrom 0 to 359?)
-    else if ((Stepper_array[_i_].Encoder_Value - Stepper_array[_i_].Last_Encoder_Value) > 180.0)
-        Stepper_array[_i_].wrap_count -= 1;
+    if (((*Stepper_array[_i_]).Encoder_Value - (*Stepper_array[_i_]).Last_Encoder_Value) < -180.0)
+        (*Stepper_array[_i_]).wrap_count += 1; //Check if we've rotated more than a full revolution (have we "wrapped" around from 359 degrees to 0 or ffrom 0 to 359?)
+    else if (((*Stepper_array[_i_]).Encoder_Value - (*Stepper_array[_i_]).Last_Encoder_Value) > 180.0)
+        (*Stepper_array[_i_]).wrap_count -= 1;
 
     //对上一次读取到的编码器角度进行存储
-    Stepper_array[_i_].Last_Encoder_Value = Stepper_array[_i_].Encoder_Value;
+    (*Stepper_array[_i_]).Last_Encoder_Value = (*Stepper_array[_i_]).Encoder_Value;
 
     //计算转动的总角度
-    Stepper_array[_i_].Current_angle = (Stepper_array[_i_].Encoder_Value + (360.0 * Stepper_array[_i_].wrap_count));
+    (*Stepper_array[_i_]).Current_angle = ((*Stepper_array[_i_]).Encoder_Value + (360.0 * (*Stepper_array[_i_]).wrap_count));
 
     //累计现在转动位置与上次位置之间的位置差
-    Stepper_array[_i_].angle_interval30 += Stepper_array[_i_].Current_angle - Stepper_array[_i_].Last_angle;
+    (*Stepper_array[_i_]).angle_interval30 += (*Stepper_array[_i_]).Current_angle - (*Stepper_array[_i_]).Last_angle;
 
     //将该次转动角度储存为上次角度
-    Stepper_array[_i_].Last_angle = Stepper_array[_i_].Current_angle;
+    (*Stepper_array[_i_]).Last_angle = (*Stepper_array[_i_]).Current_angle;
 
     //如果累加了30次 将位置差放入循环数组
-    if (Stepper_array[_i_].counter == 29)
+    if ((*Stepper_array[_i_]).counter == 29)
     {
         //数字放入
-        X_30_array[X_ary_indw] = Stepper_array[_i_].angle_interval30;
+        X_30_array[X_ary_indw] = (*Stepper_array[_i_]).angle_interval30;
         //X队列写入位置++
         X_ary_indw = (X_ary_indw++) % MAX_INDEX;
         //计数器清零
-        Stepper_array[_i_].counter = 0;
+        (*Stepper_array[_i_]).counter = 0;
         //累加变量清零
-        Stepper_array[_i_].angle_interval30 = 0;
+        (*Stepper_array[_i_]).angle_interval30 = 0;
     }
     else
     {
-        Stepper_array[_i_].counter++;
+        (*Stepper_array[_i_]).counter++;
     }
 
     //计算目前位置与目标位置间的步数差+操作电平
-    int _step_ = (Stepper_array[_i_].Target_angle - Stepper_array[_i_].Current_angle) / X_MIN_ANGLE;
+    int _step_ = ((*Stepper_array[_i_]).Target_angle - (*Stepper_array[_i_]).Current_angle) / X_MIN_ANGLE;
 
     if (_step_ >= 1)
     {
-        digitalWrite(Stepper_array[_i_].DIR, X_FWD_DIR);
-        digitalToggle(Stepper_array[_i_].STP);
+        digitalWrite((*Stepper_array[_i_]).DIR, X_FWD_DIR);
+        digitalToggle((*Stepper_array[_i_]).STP);
     }
     else if (_step_ <= -1)
     {
-        digitalWrite(Stepper_array[_i_].DIR, !X_FWD_DIR);
-        digitalToggle(Stepper_array[_i_].STP);
+        digitalWrite((*Stepper_array[_i_]).DIR, !X_FWD_DIR);
+        digitalToggle((*Stepper_array[_i_]).STP);
     }
     else
     {
-        Stepper_array[_i_].Arrived = true;
+        (*Stepper_array[_i_]).Arrived = true;
     }
 #ifdef STEPPER_DEBUG
-    if (Stepper_array[_i_].Arrived)
+    if ((*Stepper_array[_i_]).Arrived)
     {
         Serial.println('A');
     }
@@ -241,6 +257,7 @@ float Encoder_get_angle(Stepper_index _i_)
         return Encoder_Z_get_angle();
         break;
     default:
+        return 0;
         break;
     }
 }
@@ -325,13 +342,13 @@ int32_t convert_s2f(Stepper_index _stepper_)
     switch (_stepper_)
     {
     case X:
-        _freq_ = Stepper_array[_stepper_].Target_speed * 2 / X_MIN_ANGLE;
+        _freq_ = (*Stepper_array[_stepper_]).Target_speed * 2 / X_MIN_ANGLE;
         break;
     case Y:
-        _freq_ = Stepper_array[_stepper_].Target_speed * 2 / Y_MIN_ANGLE;
+        _freq_ = (*Stepper_array[_stepper_]).Target_speed * 2 / Y_MIN_ANGLE;
         break;
     case Z:
-        _freq_ = Stepper_array[_stepper_].Target_speed * 2 / Z_MIN_ANGLE;
+        _freq_ = (*Stepper_array[_stepper_]).Target_speed * 2 / Z_MIN_ANGLE;
         break;
 
     default:

@@ -1,18 +1,16 @@
-e:\5\Close_Loop_Stepper_Driver\Code\build\sketch\UI.cpp.o: \
- e:\5\Close_Loop_Stepper_Driver\Code\build\sketch\UI.cpp \
- e:\5\Close_Loop_Stepper_Driver\Code\build\sketch\UI.h \
- e:\5\Close_Loop_Stepper_Driver\Code\build\sketch\Debug_configuration.h \
- C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino/Arduino.h \
- C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino/wiring.h \
- C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino/avr/dtostrf.h \
- C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino/binary.h \
- C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino/itoa.h \
- C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino/wiring_analog.h \
- C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino/wiring_constants.h \
- C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino/wiring_digital.h \
- C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino/wiring_pulse.h \
- C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino/wiring_shift.h \
- C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino/wiring_time.h \
+e:\5\Close_Loop_Stepper_Driver\Code\build\core\main.cpp.o: \
+ C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino\main.cpp \
+ C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino\Arduino.h \
+ C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino\wiring.h \
+ C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino\avr/dtostrf.h \
+ C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino\binary.h \
+ C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino\itoa.h \
+ C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino\wiring_analog.h \
+ C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino\wiring_constants.h \
+ C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino\wiring_digital.h \
+ C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino\wiring_pulse.h \
+ C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino\wiring_shift.h \
+ C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino\wiring_time.h \
  C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino/stm32/clock.h \
  C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino/stm32/stm32_def.h \
  C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\system/Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h \
@@ -48,7 +46,7 @@ e:\5\Close_Loop_Stepper_Driver\Code\build\sketch\UI.cpp.o: \
  C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\system/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
  C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\system/Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h \
  C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino/stm32/dwt.h \
- C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino/WInterrupts.h \
+ C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino\WInterrupts.h \
  C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino/board.h \
  C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino/stm32/interrupt.h \
  C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino/stm32/analog.h \
@@ -78,24 +76,17 @@ e:\5\Close_Loop_Stepper_Driver\Code\build\sketch\UI.cpp.o: \
  C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino/stm32/timer.h \
  C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino/stm32/twi.h \
  C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino/stm32/uart.h \
- C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino/HardwareTimer.h \
- C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino/Tone.h \
- C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino/WCharacter.h \
- C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino/WSerial.h \
- C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino/HardwareSerial.h \
- C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino/Stream.h \
- C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino/Print.h \
- C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino/WString.h \
+ C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino\HardwareTimer.h \
+ C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino\Tone.h \
+ C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino\WCharacter.h \
+ C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino\WSerial.h \
+ C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino\HardwareSerial.h \
+ C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino\Stream.h \
+ C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino\Print.h \
+ C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino\WString.h \
  C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino/avr/pgmspace.h \
- C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino/Printable.h \
- C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino/USBSerial.h \
- C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino/WMath.h \
- C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino/pins_arduino.h \
- C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino/stm32/PinNames.h \
- C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\libraries\SPI\src/SPI.h \
- C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\libraries\Wire\src/Wire.h \
- C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino/Stream.h \
- C:\Users\Administrator\Documents\Arduino\libraries\Adafruit_GFX_Library/Adafruit_GFX.h \
- C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino/Print.h \
- C:\Users\Administrator\Documents\Arduino\libraries\Adafruit_GFX_Library/gfxfont.h \
- C:\Users\Administrator\Documents\Arduino\libraries\Adafruit_SSD1306/Adafruit_SSD1306.h
+ C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino\Printable.h \
+ C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino\USBSerial.h \
+ C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino\WMath.h \
+ C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino\pins_arduino.h \
+ C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino/stm32/PinNames.h

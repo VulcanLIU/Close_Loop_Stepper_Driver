@@ -1,39 +1,65 @@
 #include "CMD.h"
 
+char cmdbuffer[BUFSIZE][MAX_CMD_SIZE]; //命令队列Buffer
+char serial_char;                      //单次从串口读出的字符
+int serial_count = 0;                  //单条命令长度计数器-大小不可超过MAX_CMD_SIZE
+int bufindr = 0;                       //process_command()读取Buffer位置
+int bufindw = 0;                       //get_command()写入Buffer位置
+int buflen = 0;                        //
+char *strchr_pointer;
+
 void get_coordinates(uint8_t _G_code_)
 {
     for (int i = 0; i < 3; i++)
     {
-        if (code_seen(Stepper_array[i].Name))
+        if (code_seen((*Stepper_array[i]).Name))
         {
             //赋值目标位置
-            Stepper_array[i].Target_angle = (float)code_value();
+            (*Stepper_array[i]).Target_angle = (float)code_value();
             //将被命令提到的电机设为活动状态
-            Stepper_array[i].Actived = true;
+            (*Stepper_array[i]).Actived = true;
             //此时认为电机没有到达目标位置
-            Stepper_array[i].Arrived = false;
+            (*Stepper_array[i]).Arrived = false;
 
             //如果是G0将电机运行状态设为位置控制模式
             if (_G_code_ == 0)
             {
-                Stepper_array[i].Mode = P_mode;
+                (*Stepper_array[i]).Mode = P_mode;
             }
 
             //如果是G1将电机运行状态设为位置控制模式
             if (_G_code_ == 1)
             {
-                Stepper_array[i].Mode = S_mode;
+                (*Stepper_array[i]).Mode = S_mode;
             }
+#ifdef CMD_PROCESS2_DEBUG
+            Serial.print("Name:");
+            Serial.print((*Stepper_array[i]).Name);
+            Serial.print("  Target_angle:");
+            Serial.print((*Stepper_array[i]).Target_angle);
+            Serial.print("  Actived:");
+            Serial.print((*Stepper_array[i]).Actived);
+            Serial.print("  Arrived:");
+            Serial.print((*Stepper_array[i]).Arrived);
+            Serial.print("  Mode:");
+            Serial.println((*Stepper_array[i]).Mode);
+#endif
         }
         else
         {
-            Stepper_array[i].Actived = false;
+            (*Stepper_array[i]).Actived = false;
         }
 
-        if (_G_code_ == 1 && code_seen(Stepper_array[i].S_id))
+        if (_G_code_ == 1 && code_seen((*Stepper_array[i]).S_id))
         {
             //赋值目标速度
-            Stepper_array[i].Target_speed = (float)code_value();
+            (*Stepper_array[i]).Target_speed = (float)code_value();
+#ifdef CMD_PROCESS2_DEBUG
+            Serial.print("Name:");
+            Serial.print((*Stepper_array[i]).Name);
+            Serial.print("  Target_speed:");
+            Serial.println((*Stepper_array[i]).Target_speed);
+#endif
         }
     }
 }
@@ -52,25 +78,30 @@ void get_command()
         {
             for (int i = serial_count; i < MAX_CMD_SIZE; i++)
             {
-                cmdbuffer[bufindw][serial_count] = 0; //清空之后位置的字符
+                cmdbuffer[bufindw][i] = 0; //清空之后位置的字符
             }
+            serial_count = 0; //准备接收下一行
+            buflen += 1;
 
-#ifdef SERIAL_DEBUG
+#ifdef CMD_READ_DEBUG
             Serial.print("Get one command:");
             for (int j = 0; j < MAX_CMD_SIZE; j++)
             {
                 Serial.print(cmdbuffer[bufindw][j]);
             }
-            Serial.println();
+            Serial.print("  ");
+            Serial.print("buflen:");
+            Serial.println(buflen);
 #endif
 
-            serial_count = 0;                  //准备接收下一行
             bufindw = (bufindw + 1) % BUFSIZE; //写入位置指正++
-            buflen += 1;
         }
         else //如果不是换行符
         {
             cmdbuffer[bufindw][serial_count++] = serial_char; //直接把读取到的字符储存到cmdbuffer中
+#ifdef CMD_READ2_DEBUG
+            Serial.print(cmdbuffer[bufindw][serial_count - 1]);
+#endif
         }
     }
 }
@@ -81,7 +112,7 @@ void get_command()
  */
 void process_command()
 {
-#ifdef SERIAL_DEBUG
+#ifdef CMD_PROCESS_DEBUG
     Serial.print("Processing command...");
 #endif
     bool command_states = false;
@@ -91,18 +122,26 @@ void process_command()
         switch ((int)code_value())
         {
         case 0: //G0指令
-#ifdef SERIAL_DEBUG
+#ifdef CMD_PROCESS_DEBUG
             Serial.println(" G0 ");
 #endif
             get_coordinates(0);
             command_states = Stepper_arrived();
+#ifdef CMD_PROCESS_DEBUG
+            Serial.print(" command_states: ");
+            Serial.println(command_states);
+#endif
             break;
         case 1: //G1指令
-#ifdef SERIAL_DEBUG
+#ifdef CMD_PROCESS_DEBUG
             Serial.println(" G1 ");
 #endif
             get_coordinates(1);
             command_states = Stepper_arrived();
+#ifdef CMD_PROCESS_DEBUG
+            Serial.print(" command_states: ");
+            Serial.println(command_states);
+#endif
             break;
         default:
             break;
@@ -110,6 +149,9 @@ void process_command()
     }
     else
     {
+#ifdef CMD_PROCESS_DEBUG
+        Serial.println(" Not A Command! ");
+#endif
         //否则不构成命令，直接跳转
         command_states = true;
     }
@@ -119,9 +161,11 @@ void process_command()
         bufindr = (bufindr + 1) % BUFSIZE; //读取位置指针++
         buflen = (buflen - 1);             //待处理任务--
         command_states = false;            //复位命令状态
+#ifdef CMD_PROCESS_DEBUG
+        Serial.println("Go to Next Command!");
+#endif
     }
 }
-
 
 bool code_seen(char code)
 {

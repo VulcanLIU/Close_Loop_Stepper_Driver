@@ -1,7 +1,7 @@
 #include "MyTimer.h"
 
 //定时器频率变量定义
-float TIM1_freq = 50;
+float TIM1_freq = 1000;
 float TIM2_freq = 1000; //步进电机X的定时器
 float TIM3_freq = 1000; //步进电机Y的定时器
 float TIM4_freq = 1000; //步进电机Z的定时器
@@ -20,9 +20,11 @@ void TIM_begin()
 {
     //四个定时器初始化
     TIM1_begin();
+#ifndef ENCODER_DIRECT2_OUTPUT
     TIM2_begin();
     TIM3_begin();
     TIM4_begin();
+#endif
 
 #ifdef TIM_DEBUG
     Serial.println("TIM_begin");

@@ -24,8 +24,8 @@
 
 #define AS5600_DEFAULT_ADDRESS 0x36
 
-uint8_t Y_SCK_PIN = 6;
-uint8_t Y_SDA_PIN = 7;
+uint8_t Y_SCK_PIN;
+uint8_t Y_SDA_PIN;
 
 void AS5600_IIC_Init(void)
 {
