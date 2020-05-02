@@ -25,8 +25,8 @@ PID::PID(double *Input, double *Output, double *Setpoint,
    mySetpoint = Setpoint;
    inAuto = false;
 
-   PID::SetOutputLimits(0, 255); //default output limit corresponds to
-                                 //the arduino pwm limits
+   PID::SetOutputLimits(100, 1000); //default output limit corresponds to
+                                    //the arduino pwm limits
 
    SampleTime = 100; //default Controller Sample Time is 0.1 seconds
 
@@ -59,34 +59,48 @@ bool PID::Compute()
       return false;
    /*Compute all the working error variables*/
    double input = *myInput;
-   double error = *mySetpoint - input;
-   double dInput = (input - lastInput);
-   outputSum += (ki * error);
+   double error = *mySetpoint - input;  //e(k)误差值
+   double dInput = (input - lastInput); //微分项输入 e(k) - e(k-1) = (*mySetpoint - input) - (*mySetpoint - lastInput) = lastInput - input
+   outputSum += (ki * error);           //增量式PID积分环节
 
    /*Add Proportional on Measurement, if P_ON_M is specified*/
-   if (!pOnE)
-      outputSum -= kp * dInput;
+   // if (!pOnE)
+   //    outputSum -= kp * dInput;
 
    if (outputSum > outMax)
       outputSum = outMax;
-   else if (outputSum < outMin)
-      outputSum = outMin;
+   // else if (outputSum < outMin)
+   //    outputSum = outMin;
 
    /*Add Proportional on Error, if P_ON_E is specified*/
    double output;
    if (pOnE)
-      output = kp * error;
+      output = kp * error; //比例环节
    else
       output = 0;
 
    /*Compute Rest of PID Output*/
-   output += outputSum - kd * dInput;
+   output += outputSum - kd * dInput; //微分环节
 
    if (output > outMax)
       output = outMax;
    else if (output < outMin)
       output = outMin;
    *myOutput = output;
+
+#ifdef PID_CORE_DEBUG
+   Serial.print("input:");
+   Serial.print(input);
+   Serial.print(" Setpoint:");
+   Serial.print(*mySetpoint);
+   Serial.print(" error:");
+   Serial.print(error);
+   Serial.print(" outputSum:");
+   Serial.print(outputSum);
+   Serial.print(" output:");
+   Serial.print(output);
+   Serial.println();
+#endif
 
    return true;
 }

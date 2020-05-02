@@ -90,4 +90,5 @@ e:\5\Close_Loop_Stepper_Driver\Code\build\sketch\PID_v1.cpp.o: \
  C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino/WMath.h \
  C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino/pins_arduino.h \
  C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino/stm32/PinNames.h \
- e:\5\Close_Loop_Stepper_Driver\Code/PID_v1.h
+ e:\5\Close_Loop_Stepper_Driver\Code/PID_v1.h \
+ e:\5\Close_Loop_Stepper_Driver\Code/Debug_configuration.h

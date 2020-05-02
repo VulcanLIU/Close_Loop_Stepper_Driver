@@ -12,13 +12,13 @@
 void setup();
 #line 26 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
 void loop();
-#line 68 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
+#line 67 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
 void TIM1_Update_IT_callback(HardwareTimer *);
-#line 174 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
+#line 182 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
 void TIM2_Update_IT_callback(HardwareTimer *);
-#line 184 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
+#line 192 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
 void TIM3_Update_IT_callback(HardwareTimer *);
-#line 194 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
+#line 202 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
 void TIM4_Update_IT_callback(HardwareTimer *);
 #line 9 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
 void setup()
@@ -32,7 +32,7 @@ void setup()
     //UI初始化
     UI_begin();
 
-    //PID_begin();
+    PID_begin();
 
     //定时器初始化
     TIM_begin();
@@ -47,7 +47,6 @@ void loop()
     if (buflen > 0)
     {
         //命令处理
-
         process_command();
     }
 
@@ -82,7 +81,7 @@ void loop()
 //定时器1比较匹配中断回调函数
 void TIM1_Update_IT_callback(HardwareTimer *)
 {
-    
+
 #ifdef ENCODER_DIRECT2_OUTPUT
     digitalToggle((*Stepper_array[0]).STP);
     digitalToggle((*Stepper_array[1]).STP);
@@ -182,6 +181,15 @@ void TIM1_Update_IT_callback(HardwareTimer *)
     Serial.print("  T4_f:");
     Serial.print(TIM4_freq);
     Serial.println();
+#endif
+
+#ifdef PID_X_DEBUG
+    Serial.print(Stepper_X.Current_speed);
+    Serial.print("  ");
+    Serial.print(Stepper_X.Target_speed);
+    Serial.print("  ");
+    Serial.print(TIM2_freq);
+     Serial.println();
 #endif
 }
 

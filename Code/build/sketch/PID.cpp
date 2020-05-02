@@ -1,6 +1,7 @@
 #include "PID.h"
 
-double Kp = 2, Ki = 5, Kd = 1;
+
+double Kp = 1.5, Ki = 0, Kd = 0;
 
 double _X_Setpoint_, _X_Input_, _X_Output_;
 double _Y_Setpoint_, _Y_Input_, _Y_Output_;
@@ -24,6 +25,16 @@ float PID_X_Compute(float X_Input, float X_Setpoint)
     _X_Input_ = X_Input;
 
     StepperX_PID.Compute();
+
+#ifdef PID_X_COMPUTE_DEBUG
+    Serial.print("In:");
+    Serial.print(_X_Input_);
+    Serial.print("  S:");
+    Serial.print(_X_Setpoint_);
+    Serial.print("  Out:");
+    Serial.print(_X_Output_);
+    Serial.println();
+#endif
 
     return (float)_X_Output_;
 }

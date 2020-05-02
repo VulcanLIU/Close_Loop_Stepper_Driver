@@ -18,8 +18,6 @@ void get_coordinates(uint8_t _G_code_)
             (*Stepper_array[i]).Target_angle = (float)code_value();
             //将被命令提到的电机设为活动状态
             (*Stepper_array[i]).Actived = true;
-            //此时认为电机没有到达目标位置
-            (*Stepper_array[i]).Arrived = false;
 
             //如果是G0将电机运行状态设为位置控制模式
             if (_G_code_ == 0)
@@ -33,15 +31,15 @@ void get_coordinates(uint8_t _G_code_)
                 (*Stepper_array[i]).Mode = S_mode;
             }
 #ifdef CMD_PROCESS2_DEBUG
-            Serial.print("Name:");
+            Serial.print("N:");
             Serial.print((*Stepper_array[i]).Name);
-            Serial.print("  Target_angle:");
+            Serial.print("  T_a:");
             Serial.print((*Stepper_array[i]).Target_angle);
-            Serial.print("  Actived:");
+            Serial.print("  Ac:");
             Serial.print((*Stepper_array[i]).Actived);
-            Serial.print("  Arrived:");
+            Serial.print("  Ar:");
             Serial.print((*Stepper_array[i]).Arrived);
-            Serial.print("  Mode:");
+            Serial.print("  M:");
             Serial.println((*Stepper_array[i]).Mode);
 #endif
         }
@@ -55,9 +53,9 @@ void get_coordinates(uint8_t _G_code_)
             //赋值目标速度
             (*Stepper_array[i]).Target_speed = (float)code_value();
 #ifdef CMD_PROCESS2_DEBUG
-            Serial.print("Name:");
+            Serial.print("N:");
             Serial.print((*Stepper_array[i]).Name);
-            Serial.print("  Target_speed:");
+            Serial.print("  T_s:");
             Serial.println((*Stepper_array[i]).Target_speed);
 #endif
         }
@@ -161,6 +159,10 @@ void process_command()
         bufindr = (bufindr + 1) % BUFSIZE; //读取位置指针++
         buflen = (buflen - 1);             //待处理任务--
         command_states = false;            //复位命令状态
+        for (int i = 0; i < 3; i++)
+        {
+            ((*Stepper_array[i]).Arrived = false);//步进电机到达状态清零
+        }
 #ifdef CMD_PROCESS_DEBUG
         Serial.println("Go to Next Command!");
 #endif

@@ -17,7 +17,7 @@ void setup()
     //UI初始化
     UI_begin();
 
-    //PID_begin();
+    PID_begin();
 
     //定时器初始化
     TIM_begin();
@@ -32,7 +32,6 @@ void loop()
     if (buflen > 0)
     {
         //命令处理
-
         process_command();
     }
 
@@ -67,7 +66,7 @@ void loop()
 //定时器1比较匹配中断回调函数
 void TIM1_Update_IT_callback(HardwareTimer *)
 {
-    
+
 #ifdef ENCODER_DIRECT2_OUTPUT
     digitalToggle((*Stepper_array[0]).STP);
     digitalToggle((*Stepper_array[1]).STP);
@@ -167,6 +166,15 @@ void TIM1_Update_IT_callback(HardwareTimer *)
     Serial.print("  T4_f:");
     Serial.print(TIM4_freq);
     Serial.println();
+#endif
+
+#ifdef PID_X_DEBUG
+    Serial.print(Stepper_X.Current_speed);
+    Serial.print("  ");
+    Serial.print(Stepper_X.Target_speed);
+    Serial.print("  ");
+    Serial.print(TIM2_freq);
+     Serial.println();
 #endif
 }
 

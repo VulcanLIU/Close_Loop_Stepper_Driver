@@ -2,6 +2,8 @@
 #define __PID_H__
 
 #include "PID_v1.h"
+#include "Debug_configuration.h"
+#include "Arduino.h"
 
 //PID算法初始化
 void PID_begin();

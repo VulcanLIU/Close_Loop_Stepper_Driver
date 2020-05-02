@@ -10,12 +10,8 @@ STEPPER *Stepper_array[3] = {&Stepper_X, &Stepper_Y, &Stepper_Z};
 
 //三个电机30个定时器周期下的转角间隔储存数组以及写入位置变量
 const int MAX_INDEX = 20;
-float X_30_array[MAX_INDEX] = {};
-int X_ary_indw = 0;
-float Y_30_array[MAX_INDEX] = {};
-int Y_ary_indw = 0;
-float Z_30_array[MAX_INDEX] = {};
-int Z_ary_indw = 0;
+float T_30_array[3][MAX_INDEX] = {};
+int T_array_index[3] = {};
 
 void Stepper_begin()
 {
@@ -71,7 +67,7 @@ void Stepper_begin()
 
 void Stepper_X_refresh()
 {
-    if (Stepper_X.Actived)
+    if (Stepper_X.Actived && !Stepper_X.Arrived)
     {
 #ifdef STEPPER_DEBUG
         Serial.print("X:");
@@ -82,7 +78,7 @@ void Stepper_X_refresh()
 
 void Stepper_Y_refresh()
 {
-    if (Stepper_Y.Actived)
+    if (Stepper_Y.Actived && !Stepper_Y.Arrived)
     {
         Stepper_refresh(Y);
 
@@ -94,7 +90,7 @@ void Stepper_Y_refresh()
 
 void Stepper_Z_refresh()
 {
-    if (Stepper_Z.Actived)
+    if (Stepper_Z.Actived && !Stepper_Z.Arrived)
     {
         Stepper_refresh(Z);
 
@@ -131,9 +127,9 @@ void Stepper_refresh(Stepper_index _i_)
     if ((*Stepper_array[_i_]).counter == 29)
     {
         //数字放入
-        X_30_array[X_ary_indw] = (*Stepper_array[_i_]).angle_interval30;
+        T_30_array[_i_][T_array_index[_i_]] = (*Stepper_array[_i_]).angle_interval30;
         //X队列写入位置++
-        X_ary_indw = (X_ary_indw++) % MAX_INDEX;
+        T_array_index[_i_] = (T_array_index[_i_] + 1) % MAX_INDEX;
         //计数器清零
         (*Stepper_array[_i_]).counter = 0;
         //累加变量清零
@@ -145,14 +141,14 @@ void Stepper_refresh(Stepper_index _i_)
     }
 
     //计算目前位置与目标位置间的步数差+操作电平
-    int _step_ = ((*Stepper_array[_i_]).Target_angle - (*Stepper_array[_i_]).Current_angle) / X_MIN_ANGLE;
+    float _step_ = ((*Stepper_array[_i_]).Target_angle - (*Stepper_array[_i_]).Current_angle) / X_MIN_ANGLE;
 
-    if (_step_ >= 1)
+    if (_step_ >= 0.7)
     {
         digitalWrite((*Stepper_array[_i_]).DIR, X_FWD_DIR);
         digitalToggle((*Stepper_array[_i_]).STP);
     }
-    else if (_step_ <= -1)
+    else if (_step_ <= -0.7)
     {
         digitalWrite((*Stepper_array[_i_]).DIR, !X_FWD_DIR);
         digitalToggle((*Stepper_array[_i_]).STP);
@@ -286,15 +282,18 @@ float get_X_speed()
     //累加转角间隔储存数组中的角度
     for (int _i_ = 0; _i_ < MAX_INDEX; _i_++)
     {
-        _speed_ += X_30_array[_i_];
+        _speed_ += T_30_array[X][_i_];
     }
 
     //取平均值计算一个TIM2周期步进电机转过的角度
-    _speed_ = _speed_ / MAX_INDEX;
+    _speed_ = _speed_ / MAX_INDEX / 15;
 
     //计算一秒钟转过的度数
-    _speed_ *= TIM2_freq;
-
+    _speed_ *= TIM2_freq / 2;
+    
+#ifdef STEPPER_SPEED_DEBUG
+    Serial.println(_speed_);
+#endif
     return _speed_;
 }
 
@@ -305,14 +304,14 @@ float get_Y_speed()
     //累加转角间隔储存数组中的角度
     for (int _i_ = 0; _i_ < MAX_INDEX; _i_++)
     {
-        _speed_ += Y_30_array[_i_];
+        _speed_ += T_30_array[Y][_i_];
     }
 
     //取平均值计算一个TIM2周期步进电机转过的角度
-    _speed_ = _speed_ / MAX_INDEX;
+    _speed_ = _speed_ / MAX_INDEX / 15;
 
     //计算一秒钟转过的度数
-    _speed_ *= TIM3_freq;
+    _speed_ *= TIM3_freq / 2;
 
     return _speed_;
 }
@@ -324,14 +323,14 @@ float get_Z_speed()
     //累加转角间隔储存数组中的角度
     for (int _i_ = 0; _i_ < MAX_INDEX; _i_++)
     {
-        _speed_ += Z_30_array[_i_];
+        _speed_ += T_30_array[Z][_i_];
     }
 
     //取平均值计算一个TIM2周期步进电机转过的角度
-    _speed_ = _speed_ / MAX_INDEX;
+    _speed_ = _speed_ / MAX_INDEX / 15;
 
     //计算一秒钟转过的度数
-    _speed_ *= TIM4_freq;
+    _speed_ *= TIM4_freq / 2;
 
     return _speed_;
 }

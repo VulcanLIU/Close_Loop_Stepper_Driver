@@ -18,7 +18,7 @@ void setup()
     //UI初始化
     UI_begin();
 
-    //PID_begin();
+    PID_begin();
 
     //定时器初始化
     TIM_begin();
@@ -33,7 +33,6 @@ void loop()
     if (buflen > 0)
     {
         //命令处理
-
         process_command();
     }
 
@@ -68,19 +67,7 @@ void loop()
 //定时器1比较匹配中断回调函数
 void TIM1_Update_IT_callback(HardwareTimer *)
 {
-
-
-    digitalToggle((*Stepper_array[0]).STP);
-    digitalToggle((*Stepper_array[1]).STP);
-    digitalToggle((*Stepper_array[2]).STP);
-    Serial2.print(analogRead(A0));
-    Serial2.print("  ");
-    Serial2.print(analogRead(A1));
-    Serial2.print("  ");
-    Serial2.print(analogRead(A2));
-    Serial2.println();
-
-
+# 82 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
     if (Stepper_X.Actived)
     {
         //步进电机X PID计算
@@ -158,7 +145,7 @@ void TIM1_Update_IT_callback(HardwareTimer *)
         TIM4_freq = 20;
         TIM4_setOverflow(TIM4_freq);
     }
-# 171 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
+# 179 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
 }
 
 //定时器2比较匹配中断回调函数
