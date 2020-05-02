@@ -5,12 +5,16 @@
 #include "Debug_configuration.h"
 #include "Arduino.h"
 
+extern double Kp, Ki, Kd;
+
 //PID算法初始化
 void PID_begin();
 
 //PID计算函数
-float PID_X_Compute(float X_Input,float X_Setpoint);
-float PID_Y_Compute(float Y_Input,float Y_Setpoint);
-float PID_Z_Compute(float Z_Input,float Z_Setpoint);
+float PID_X_Compute(float X_Input, float X_Setpoint);
+float PID_Y_Compute(float Y_Input, float Y_Setpoint);
+float PID_Z_Compute(float Z_Input, float Z_Setpoint);
+
+void PID_SetTunings(double, double, double);
 
 #endif

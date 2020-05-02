@@ -1,7 +1,7 @@
 #include "PID.h"
 
 
-double Kp = 1.1, Ki = 0, Kd = 0;
+double Kp = 1.2, Ki = 0, Kd = 0;
 
 double _X_Setpoint_, _X_Input_, _X_Output_;
 double _Y_Setpoint_, _Y_Input_, _Y_Output_;
@@ -56,4 +56,11 @@ float PID_Z_Compute(float Z_Input, float Z_Setpoint)
     StepperZ_PID.Compute();
 
     return (float)_Z_Output_;
+}
+
+void PID_SetTunings(double _kp_, double _ki_, double _kd_)
+{
+    StepperX_PID.SetTunings(_kp_,_ki_,_kd_);
+    StepperY_PID.SetTunings(_kp_,_ki_,_kd_);
+    StepperZ_PID.SetTunings(_kp_,_ki_,_kd_);
 }

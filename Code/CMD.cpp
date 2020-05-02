@@ -151,6 +151,9 @@ void process_command()
         switch ((int)code_value())
         {
         case 0:
+#ifdef CMD_PROCESS_DEBUG
+            Serial.println(" M0 ");
+#endif
             if (code_seen('P'))
             {
                 //赋值目标位置
@@ -172,6 +175,7 @@ void process_command()
             break;
         }
         PID_SetTunings(Kp, Ki, Kd);
+        command_states = true;
 #ifdef PID_CORE_DEBUG
         Serial.print("Kp:");
         Serial.print(Kp);

@@ -3,6 +3,7 @@
 
 #include "Arduino.h"
 #include "Stepper.h"
+#include "PID.h"
 
 #define MAX_CMD_SIZE 96
 #define BUFSIZE 4

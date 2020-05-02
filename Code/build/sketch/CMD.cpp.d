@@ -96,4 +96,6 @@ e:\5\Close_Loop_Stepper_Driver\Code\build\sketch\CMD.cpp.o: \
  e:\5\Close_Loop_Stepper_Driver\Code\build\sketch\AS5600_IIC.h \
  e:\5\Close_Loop_Stepper_Driver\Code\build\sketch\Debug_configuration.h \
  e:\5\Close_Loop_Stepper_Driver\Code\build\sketch\MyTimer.h \
- C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino/HardwareSerial.h
+ C:\Users\Administrator\AppData\Local\Arduino15\packages\STM32\hardware\stm32\1.7.0\cores\arduino/HardwareSerial.h \
+ e:\5\Close_Loop_Stepper_Driver\Code\build\sketch\PID.h \
+ e:\5\Close_Loop_Stepper_Driver\Code\build\sketch\PID_v1.h
