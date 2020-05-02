@@ -14,11 +14,11 @@ void setup();
 void loop();
 #line 67 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
 void TIM1_Update_IT_callback(HardwareTimer *);
-#line 182 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
+#line 183 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
 void TIM2_Update_IT_callback(HardwareTimer *);
-#line 192 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
+#line 193 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
 void TIM3_Update_IT_callback(HardwareTimer *);
-#line 202 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
+#line 203 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
 void TIM4_Update_IT_callback(HardwareTimer *);
 #line 9 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
 void setup()
@@ -106,7 +106,8 @@ void TIM1_Update_IT_callback(HardwareTimer *)
             break;
         case S_mode:
             /* 增量PID代码段 */
-            TIM2_freq = PID_X_Compute(Stepper_X.Current_speed, Stepper_X.Target_speed);
+            TIM2_freq = get_TIM_base_freq(Stepper_X.Target_speed,X_MIN_ANGLE);
+            TIM2_freq += PID_X_Compute(Stepper_X.Current_speed, Stepper_X.Target_speed);
             // //更新定时器频率
             TIM2_setOverflow(TIM2_freq);
             break;

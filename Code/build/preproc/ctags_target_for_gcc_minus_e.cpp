@@ -80,7 +80,8 @@ void TIM1_Update_IT_callback(HardwareTimer *)
             break;
         case S_mode:
             /* 增量PID代码段 */
-            TIM2_freq = PID_X_Compute(Stepper_X.Current_speed, Stepper_X.Target_speed);
+            TIM2_freq = get_TIM_base_freq(Stepper_X.Target_speed,1.8);
+            TIM2_freq += PID_X_Compute(Stepper_X.Current_speed, Stepper_X.Target_speed);
             // //更新定时器频率
             TIM2_setOverflow(TIM2_freq);
             break;
@@ -145,7 +146,7 @@ void TIM1_Update_IT_callback(HardwareTimer *)
         TIM4_freq = 20;
         TIM4_setOverflow(TIM4_freq);
     }
-# 179 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
+# 180 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
 }
 
 //定时器2比较匹配中断回调函数

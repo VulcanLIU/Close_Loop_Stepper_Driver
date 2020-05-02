@@ -25,7 +25,7 @@ PID::PID(double *Input, double *Output, double *Setpoint,
    mySetpoint = Setpoint;
    inAuto = false;
 
-   PID::SetOutputLimits(100, 1000); //default output limit corresponds to
+   PID::SetOutputLimits(0, 300); //default output limit corresponds to
                                   //the arduino pwm limits
 
    SampleTime = 100; //default Controller Sample Time is 0.1 seconds
@@ -61,7 +61,6 @@ bool PID::Compute()
    double input = *myInput;             //传感器输入
    double error = *mySetpoint - input;  //e(k)误差值
    double dInput = (input - lastInput); //微分项输入 e(k) - e(k-1) = (*mySetpoint - input) - (*mySetpoint - lastInput) = lastInput - input
-   outputSum += (ki * error);           //增量式PID积分环节
 
    /*Add Proportional on Measurement, if P_ON_M is specified*/
    // if (!pOnE)
@@ -108,8 +107,6 @@ bool PID::Compute()
    Serial.print(dInput);
    Serial.print(" outputSum:");
    Serial.print(outputSum);
-   Serial.print(" output:");
-   Serial.print(output);
    Serial.println();
 #endif
 

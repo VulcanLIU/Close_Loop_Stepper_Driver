@@ -18,6 +18,7 @@
 //#define TIM2_DEBUG
 // #define TIM3_DEBUG
 // #define TIM4_DEBUG
+//#define TIM_BASE_FREQ_DEBUG
 
 //#define STEPPER_DEBUG
 //#define STEPPER_SPEED_DEBUG
@@ -29,7 +30,7 @@
 
 //#define PID_X_DEBUG //G1 X9999 A450
 //#define PID_X_COMPUTE_DEBUG
-#define PID_CORE_DEBUG //M0 P2 I0.5 D0
+#define PID_CORE_DEBUG //M0 P0.5 I1 D0
 
 #endif
 

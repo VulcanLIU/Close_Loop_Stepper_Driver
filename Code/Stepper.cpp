@@ -9,7 +9,7 @@ STEPPER Stepper_Z;
 STEPPER *Stepper_array[3] = {&Stepper_X, &Stepper_Y, &Stepper_Z};
 
 //三个电机30个定时器周期下的转角间隔储存数组以及写入位置变量
-const int MAX_INDEX = 20;
+const int MAX_INDEX = 10;
 float T_30_array[3][MAX_INDEX] = {};
 int T_array_index[3] = {};
 
@@ -290,7 +290,8 @@ float get_X_speed()
 
     //计算一秒钟转过的度数
     _speed_ *= TIM2_freq / 2;
-    
+
+    _speed_ = abs(_speed_);
 #ifdef STEPPER_SPEED_DEBUG
     Serial.println(_speed_);
 #endif
@@ -312,7 +313,7 @@ float get_Y_speed()
 
     //计算一秒钟转过的度数
     _speed_ *= TIM3_freq / 2;
-
+    _speed_ = abs(_speed_);
     return _speed_;
 }
 
@@ -331,7 +332,7 @@ float get_Z_speed()
 
     //计算一秒钟转过的度数
     _speed_ *= TIM4_freq / 2;
-
+    _speed_ = abs(_speed_);
     return _speed_;
 }
 

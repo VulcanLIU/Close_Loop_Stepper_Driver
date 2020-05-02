@@ -37,4 +37,6 @@ void TIM2_setOverflow(uint32_t _freq_);
 void TIM3_setOverflow(uint32_t _freq_);
 void TIM4_setOverflow(uint32_t _freq_);
 
+int get_TIM_base_freq(float _target_speed_, float _MIN_ANGLE_);
+
 #endif

@@ -109,3 +109,13 @@ void TIM4_setOverflow(uint32_t _freq_)
     Serial.println(_freq_);
 #endif
 }
+
+int get_TIM_base_freq(float _target_speed_, float _MIN_ANGLE_)
+{
+    int _base_freq_ = abs(_target_speed_) * 2 / _MIN_ANGLE_;
+#ifdef TIM_BASE_FREQ_DEBUG
+    Serial.print("_base_freq_:");
+    Serial.println(_base_freq_);
+#endif
+    return _base_freq_;
+}
