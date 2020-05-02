@@ -148,7 +148,27 @@ void TIM1_Update_IT_callback(HardwareTimer *)
         TIM4_freq = 20;
         TIM4_setOverflow(TIM4_freq);
     }
-# 182 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
+# 175 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
+    Serial2.print("  CX:");
+    Serial2.print(Stepper_X.Current_speed);
+    Serial2.print("  TX:");
+    Serial2.print(Stepper_X.Target_speed);
+
+
+    Serial2.print("  CY:");
+    Serial2.print(Stepper_Y.Current_speed);
+    Serial2.print("  TY:");
+    Serial2.print(Stepper_Y.Target_speed);
+
+
+    Serial2.print("  CZ:");
+    Serial2.print(Stepper_Z.Current_speed);
+    Serial2.print("  TZ:");
+    Serial2.print(Stepper_Z.Target_speed);
+
+
+    Serial2.println();
+
 }
 
 //定时器2比较匹配中断回调函数

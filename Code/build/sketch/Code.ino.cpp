@@ -14,11 +14,11 @@ void setup();
 void loop();
 #line 67 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
 void TIM1_Update_IT_callback(HardwareTimer *);
-#line 185 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
+#line 198 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
 void TIM2_Update_IT_callback(HardwareTimer *);
-#line 195 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
+#line 208 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
 void TIM3_Update_IT_callback(HardwareTimer *);
-#line 205 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
+#line 218 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
 void TIM4_Update_IT_callback(HardwareTimer *);
 #line 9 "e:\\5\\Close_Loop_Stepper_Driver\\Code\\Code.ino"
 void setup()
@@ -187,11 +187,24 @@ void TIM1_Update_IT_callback(HardwareTimer *)
 #endif
 
 #ifdef PID_X_DEBUG
+    Serial.print("  CX:");
     Serial.print(Stepper_X.Current_speed);
-    Serial.print("  ");
+    Serial.print("  TX:");
     Serial.print(Stepper_X.Target_speed);
-    Serial.print("  ");
-    Serial.print(TIM2_freq);
+#endif
+#ifdef PID_Y_DEBUG
+    Serial.print("  CY:");
+    Serial.print(Stepper_Y.Current_speed);
+    Serial.print("  TY:");
+    Serial.print(Stepper_Y.Target_speed);
+#endif
+#ifdef PID_Z_DEBUG
+    Serial.print("  CZ:");
+    Serial.print(Stepper_Z.Current_speed);
+    Serial.print("  TZ:");
+    Serial.print(Stepper_Z.Target_speed);
+#endif
+#if defined(PID_X_DEBUG) || defined(PID_X_DEBUG) || defined(PID_X_DEBUG)
     Serial.println();
 #endif
 }

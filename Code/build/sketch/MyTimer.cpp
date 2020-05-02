@@ -1,7 +1,11 @@
 #include "MyTimer.h"
 
 //定时器频率变量定义
+#ifdef ENCODER_DIRECT2_OUTPUT
+float TIM1_freq = 1000;
+#else
 float TIM1_freq = 50;
+#endif
 float TIM2_freq = 1000; //步进电机X的定时器
 float TIM3_freq = 1000; //步进电机Y的定时器
 float TIM4_freq = 1000; //步进电机Z的定时器

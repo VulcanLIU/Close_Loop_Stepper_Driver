@@ -9,8 +9,8 @@
 
 //#define ENCODER_DEBUG
 //#define ENCODER_IIC_OUTPUT
-//#define ENCODER_DIRECT_OUTPUT
-//#define ENCODER_DIRECT2_OUTPUT
+//#define ENCODER_DIRECT_OUTPUT //
+//#define ENCODER_DIRECT2_OUTPUT //在定时器中
 
 //#define UI_DEBUG
 
@@ -28,13 +28,26 @@
 //#define CMD_PROCESS_DEBUG //显示读到的指令类型、指令处理状态
 //#define CMD_PROCESS2_DEBUG
 
-//#define PID_X_DEBUG //G1 X9999 A450
+#define PID_X_DEBUG
+#define PID_Y_DEBUG
+#define PID_Z_DEBUG
+
 //#define PID_X_COMPUTE_DEBUG
 
 //#define PID_CORE_DEBUG
-//#define PID_X_CORE_DEBUG //M0 P0.5 I1 D0
-//#define PID_Y_CORE_DEBUG
-//#define PID_Z_CORE_DEBUG
+//#define PID_X_CORE_DEBUG 
+
+//DEBUG指令
+//G0 X3000
+//G0 Y3000
+//G0 Z3000
+//G0 X1000 Y2000 Z3000
+//G1 X9999 A450
+//G1 Y9999 B540
+//G1 Z9999 C1000
+//G1 X9999 Y9999 Z9999 A450 B540 C1000
+
+//M0 P0.1 I1.3 D0
 
 #endif
 

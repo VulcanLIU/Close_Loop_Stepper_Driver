@@ -172,11 +172,24 @@ void TIM1_Update_IT_callback(HardwareTimer *)
 #endif
 
 #ifdef PID_X_DEBUG
+    Serial.print("  CX:");
     Serial.print(Stepper_X.Current_speed);
-    Serial.print("  ");
+    Serial.print("  TX:");
     Serial.print(Stepper_X.Target_speed);
-    Serial.print("  ");
-    Serial.print(TIM2_freq);
+#endif
+#ifdef PID_Y_DEBUG
+    Serial.print("  CY:");
+    Serial.print(Stepper_Y.Current_speed);
+    Serial.print("  TY:");
+    Serial.print(Stepper_Y.Target_speed);
+#endif
+#ifdef PID_Z_DEBUG
+    Serial.print("  CZ:");
+    Serial.print(Stepper_Z.Current_speed);
+    Serial.print("  TZ:");
+    Serial.print(Stepper_Z.Target_speed);
+#endif
+#if defined(PID_X_DEBUG) || defined(PID_X_DEBUG) || defined(PID_X_DEBUG)
     Serial.println();
 #endif
 }
