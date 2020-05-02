@@ -5,6 +5,10 @@ void Encoder_begin()
     //通过软串口将编码器配置为模拟输出模式
     AS5600_IIC_Init(Encoder_X_SDA_pin, Encoder_X_SCL_pin);
     AS5600_IIC_Write_OneByte((0x36 << 1), 0x08, 0XC0);
+    while (AS5600_IIC_Read_OneByte((0x36 << 1), 0x08) != 192)
+    {
+        AS5600_IIC_Write_OneByte((0x36 << 1), 0x08, 0XC0);
+    }
 #ifdef ENCODER_IIC_OUTPUT
     Serial.print("X_mode:");
     Serial.print("  ");
@@ -12,6 +16,10 @@ void Encoder_begin()
 #endif
     AS5600_IIC_Init(Encoder_Y_SDA_pin, Encoder_Y_SCL_pin);
     AS5600_IIC_Write_OneByte((0x36 << 1), 0x08, 0XC0);
+    while (AS5600_IIC_Read_OneByte((0x36 << 1), 0x08) != 192)
+    {
+        AS5600_IIC_Write_OneByte((0x36 << 1), 0x08, 0XC0);
+    }
 #ifdef ENCODER_IIC_OUTPUT
     Serial.print("Y_mode:");
     Serial.print("  ");
@@ -19,6 +27,10 @@ void Encoder_begin()
 #endif
     AS5600_IIC_Init(Encoder_Z_SDA_pin, Encoder_Z_SCL_pin);
     AS5600_IIC_Write_OneByte((0x36 << 1), 0x08, 0XC0);
+    while (AS5600_IIC_Read_OneByte((0x36 << 1), 0x08) != 192)
+    {
+        AS5600_IIC_Write_OneByte((0x36 << 1), 0x08, 0XC0);
+    }
 #ifdef ENCODER_IIC_OUTPUT
     Serial.print("Z_mode:");
     Serial.print("  ");

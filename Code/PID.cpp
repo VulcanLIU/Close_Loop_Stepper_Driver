@@ -1,7 +1,7 @@
 #include "PID.h"
 
 
-double Kp = 1.2, Ki = 0, Kd = 0;
+double Kp = 0.1, Ki = 1, Kd = 0;
 
 double _X_Setpoint_, _X_Input_, _X_Output_;
 double _Y_Setpoint_, _Y_Input_, _Y_Output_;

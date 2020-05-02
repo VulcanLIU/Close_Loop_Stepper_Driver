@@ -107,9 +107,9 @@ void Stepper_refresh(Stepper_index _i_)
 
     //处理编码器角度
     if (((*Stepper_array[_i_]).Encoder_Value - (*Stepper_array[_i_]).Last_Encoder_Value) < -180.0)
-        (*Stepper_array[_i_]).wrap_count += 1; //Check if we've rotated more than a full revolution (have we "wrapped" around from 359 degrees to 0 or ffrom 0 to 359?)
+        (*Stepper_array[_i_]).wrap_count += 1; //转动圈数+1 表明正转了一圈
     else if (((*Stepper_array[_i_]).Encoder_Value - (*Stepper_array[_i_]).Last_Encoder_Value) > 180.0)
-        (*Stepper_array[_i_]).wrap_count -= 1;
+        (*Stepper_array[_i_]).wrap_count -= 1; //转动圈数-1 表明反转了一圈
 
     //对上一次读取到的编码器角度进行存储
     (*Stepper_array[_i_]).Last_Encoder_Value = (*Stepper_array[_i_]).Encoder_Value;

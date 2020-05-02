@@ -28,11 +28,17 @@
 //#define CMD_PROCESS_DEBUG //显示读到的指令类型、指令处理状态
 //#define CMD_PROCESS2_DEBUG
 
-//#define PID_X_DEBUG //G1 X9999 A450
+//#define PID_X_DEBUG 
 //#define PID_X_COMPUTE_DEBUG
-#define PID_X_CORE_DEBUG //M0 P0.5 I1 D0
-#define PID_Y_CORE_DEBUG
-#define PID_Z_CORE_DEBUG
+
+//#define PID_CORE_DEBUG
+//#define PID_X_CORE_DEBUG //M0 P0.5 I1 D0
+//#define PID_Y_CORE_DEBUG
+//#define PID_Z_CORE_DEBUG
+
+//DEBUG指令
+//
+//G1 X9999 A450
 #endif
 
 #endif
