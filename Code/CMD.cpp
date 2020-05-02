@@ -142,8 +142,45 @@ void process_command()
 #endif
             break;
         default:
+            command_states = true;
             break;
         }
+    }
+    else if (code_seen('M')) //如果命令中有G
+    {
+        switch ((int)code_value())
+        {
+        case 0:
+            if (code_seen('P'))
+            {
+                //赋值目标位置
+                Kp = (float)code_value();
+            }
+            if (code_seen('I'))
+            {
+                //赋值目标位置
+                Ki = (float)code_value();
+            }
+            if (code_seen('D'))
+            {
+                //赋值目标位置
+                Kd = (float)code_value();
+            }
+            break;
+        default:
+            command_states = true;
+            break;
+        }
+        PID_SetTunings(Kp, Ki, Kd);
+#ifdef PID_CORE_DEBUG
+        Serial.print("Kp:");
+        Serial.print(Kp);
+        Serial.print("  Ki:");
+        Serial.print(Ki);
+        Serial.print("  Kd:");
+        Serial.print(Kd);
+        Serial.println();
+#endif
     }
     else
     {
@@ -161,7 +198,7 @@ void process_command()
         command_states = false;            //复位命令状态
         for (int i = 0; i < 3; i++)
         {
-            ((*Stepper_array[i]).Arrived = false);//步进电机到达状态清零
+            ((*Stepper_array[i]).Arrived = false); //步进电机到达状态清零
         }
 #ifdef CMD_PROCESS_DEBUG
         Serial.println("Go to Next Command!");

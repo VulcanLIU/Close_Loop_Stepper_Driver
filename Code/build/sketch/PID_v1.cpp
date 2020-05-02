@@ -69,8 +69,8 @@ bool PID::Compute()
 
    if (outputSum > outMax)
       outputSum = outMax;
-   // else if (outputSum < outMin)
-   //    outputSum = outMin;
+   else if (outputSum < outMin)
+      outputSum = outMin;
 
    /*Add Proportional on Error, if P_ON_E is specified*/
    double output;
@@ -80,7 +80,7 @@ bool PID::Compute()
       output = 0;
 
    /*Compute Rest of PID Output*/
-   output += outputSum - kd * dInput; //微分环节
+   //output += outputSum - kd * dInput; //微分环节
 
    if (output > outMax)
       output = outMax;

@@ -27,7 +27,7 @@
 //  #define CMD_PROCESS_DEBUG
 //  #define CMD_PROCESS2_DEBUG
 
-//#define PID_X_DEBUG //G1 X9999 A500
+//#define PID_X_DEBUG //G1 X9999 A450
 //#define PID_X_COMPUTE_DEBUG
 #define PID_CORE_DEBUG   
 
